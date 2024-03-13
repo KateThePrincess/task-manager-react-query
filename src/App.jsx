@@ -1,18 +1,10 @@
 import { ToastContainer } from 'react-toastify';
-import { nanoid } from 'nanoid';
 import Form from './Form';
 import Items from './Items';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import customFetch from './utils';
-const defaultItems = [
-  { id: nanoid(), title: 'walk the dog', isDone: false },
-  { id: nanoid(), title: 'wash dishes', isDone: false },
-  { id: nanoid(), title: 'drink coffee', isDone: true },
-  { id: nanoid(), title: 'take a nap', isDone: false },
-];
 
 const App = () => {
-  const [items, setItems] = useState([]);
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -40,7 +32,7 @@ const App = () => {
         theme='light'
       />
       <Form />
-      <Items items={items} />
+      <Items />
     </section>
   );
 };

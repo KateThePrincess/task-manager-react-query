@@ -1,29 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import customFetch from './utils';
 import { MdClose } from 'react-icons/md';
-import { FaBasketShopping } from 'react-icons/fa6';
-import { BsCheck2All } from 'react-icons/bs';
 import { PiShieldCheckBold } from 'react-icons/pi';
+import { useFetchTasks } from './reactQueryCustomHooks';
 
 const SingleItem = ({ item }) => {
-  const queryClient = useQueryClient();
-  const { mutate: editTask } = useMutation({
-    mutationFn: ({ taskId, isDone }) => {
-      return customFetch.patch(`/${taskId}`, { isDone: isDone });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
-
-  const { mutate: deleteTask } = useMutation({
-    mutationFn: ({ taskId }) => {
-      return customFetch.delete(`/${taskId}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
+  const { editTask, deleteTask } = useFetchTasks();
   return (
     <div className='single-item'>
       {item.isDone && (
